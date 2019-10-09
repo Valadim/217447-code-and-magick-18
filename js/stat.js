@@ -10,9 +10,11 @@ var TEXT_Y = 40;
 var FONT_GAP = 15;
 var TEXT_HEIGHT = 30;
 var BAR_WIDTH = 40;
-var barHeight = 150;
+var BAR_HEIGHT = 150;
 var WIN_MESSAGE = ['Ура вы победили!', 'Список результатов:'];
-var winFontStyle = '16px PT Mono';
+var WIN_FONT_STYLE = '16px PT Mono';
+var PLAYER_NAME = 'Вы';
+var BAR_PLAYER_COLOR = 'rgba(255, 0, 0, 1)';
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -48,18 +50,22 @@ window.renderStatistics = function (ctx, players, times) {
 
   for (var i = 0; i < players.length; i++) {
 
-    if (players[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-      ctx.fillRect(CLOUD_X + GAP + (GAP + BAR_WIDTH) * i, (barHeight - (barHeight * times[i]) / maxTime) + CLOUD_HEIGHT - barHeight - TEXT_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
+    var barCordX = CLOUD_X + GAP + (GAP + BAR_WIDTH) * i;
+    var barCordY = (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime) + CLOUD_HEIGHT - BAR_HEIGHT - TEXT_HEIGHT;
+    var barPlayersColor = 'hsl(250, ' + '50%, ' + Math.floor(30 + i * 15) + '%)';
+
+    if (players[i] === PLAYER_NAME) {
+      ctx.fillStyle = BAR_PLAYER_COLOR;
+      ctx.fillRect(barCordX, barCordY, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     } else {
-      ctx.fillStyle = 'hsl(250, ' + '50%, ' + Math.floor(30 + i * 15) + '%)';
-      ctx.fillRect(CLOUD_X + GAP + (GAP + BAR_WIDTH) * i, (barHeight - (barHeight * times[i]) / maxTime) + CLOUD_HEIGHT - barHeight - TEXT_HEIGHT, BAR_WIDTH, (barHeight * times[i]) / maxTime);
+      ctx.fillStyle = barPlayersColor;
+      ctx.fillRect(barCordX, barCordY, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     }
     ctx.fillStyle = '#000';
-    ctx.fillText(players[i], CLOUD_X + GAP + (GAP + BAR_WIDTH) * i, CLOUD_HEIGHT - FONT_GAP);
+    ctx.fillText(players[i], barCordX, CLOUD_HEIGHT - FONT_GAP);
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.floor(times[i]), CLOUD_X + GAP + (GAP + BAR_WIDTH) * i, (barHeight - (barHeight * times[i]) / maxTime) + CLOUD_HEIGHT - barHeight - BAR_WIDTH);
+    ctx.fillText(Math.floor(times[i]), barCordX, (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime) + CLOUD_HEIGHT - BAR_HEIGHT - BAR_WIDTH);
   }
 
-  winMessage(ctx, TEXT_X, TEXT_Y, WIN_MESSAGE, winFontStyle);
+  winMessage(ctx, TEXT_X, TEXT_Y, WIN_MESSAGE, WIN_FONT_STYLE);
 };
