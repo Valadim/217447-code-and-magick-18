@@ -22,7 +22,7 @@ var createWizards = function (count) {
       name: WIZARD_NAMES[Math.floor(Math.random() * WIZARD_NAMES.length)],
       surname: WIZARD_SURNAMES[Math.floor(Math.random() * WIZARD_SURNAMES.length)],
       coatColor: WIZARD_COAT_COLOR[Math.floor(Math.random() * WIZARD_COAT_COLOR.length)],
-      eyesColor: WIZARD_EYES_COLOR[Math.floor(Math.random() * WIZARD_EYES_COLOR.length)]
+      eyesColor: WIZARD_EYES_COLOR[Math.floor(Math.random() * WIZARD_EYES_COLOR.length)],
     };
     wizards.push(wizard);
   }
