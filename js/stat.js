@@ -15,6 +15,7 @@ var WIN_MESSAGE = ['Ура вы победили!', 'Список результ
 var WIN_FONT_STYLE = '16px PT Mono';
 var PLAYER_NAME = 'Вы';
 var BAR_PLAYER_COLOR = 'rgba(255, 0, 0, 1)';
+var BLACK_COLOR = '#000';
 
 var renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -61,9 +62,9 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = barPlayersColor;
       ctx.fillRect(barCordX, barCordY, BAR_WIDTH, (BAR_HEIGHT * times[i]) / maxTime);
     }
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = BLACK_COLOR;
     ctx.fillText(players[i], barCordX, CLOUD_HEIGHT - FONT_GAP);
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = BLACK_COLOR;
     ctx.fillText(Math.floor(times[i]), barCordX, (BAR_HEIGHT - (BAR_HEIGHT * times[i]) / maxTime) + CLOUD_HEIGHT - BAR_HEIGHT - BAR_WIDTH);
   }
 
